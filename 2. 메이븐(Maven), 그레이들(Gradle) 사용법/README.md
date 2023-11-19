@@ -312,3 +312,16 @@ Gradle 프로젝트 환경 + 자바 어플리케이션 환경이 구성되며, m
 gradle tasks
 ```
 
+![image9](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image9.png)
+
+
+### 프로젝트 빌드
+
+```yaml
+gradle build
+```
+
+- 프로젝트를 컴파일(빌드)한다.
+- build.gradle에 apply plugin: 'java'가 추가된 경우 .jar파일로 패키징까지 된다.
+- 컴파일된 파일들은 'app > build' 폴더 안에 생성되며, .jar파일은 'build > libs'에 패키징된다.
+
