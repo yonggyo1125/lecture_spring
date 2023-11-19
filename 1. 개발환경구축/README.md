@@ -47,9 +47,28 @@
 
 # 그레이들 프로젝트 생성 
 
+> 그레이들 프로젝트는 명령프롬프트에서 <code>gradle init --type java-application</code>을 통해서도 생성한 후 인텔리제이에서 open 하여 편집할 수도 있고 또는 인텔리제이에 탑재되어 있는 자체 gradle 명령어를 통해서도 생성할 수 있습니다. 여기에서는 인텔리제이 IDE에 탑재된 기능을 통해서 생성합니다
+
+<code>New Project</code> 클릭
+
 ![image3](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image3.png)
 
+1. Name: 프로젝트명을 입력합니다. 프로젝트 명은 location 디렉토리의 하위 디렉토리로 생성이 됩니다. 
+2. Language: <code>Java</code>를 선택 합니다.
+3. Build system: <code>Gradle</code>를 선택합니다.
+4. JDK: 스프링 6버전 부터는 기본 17버전으로 컴파일 되어 배포되므로 17버전 이상을 선택합니다. 그러나 현재 최신 버전인 Gradle 8.4버전에서는 17버전 까지만 지원하므로 17로 설정
+5. Gradle DSL: <code>Groovy</code>로 선택
+6. Advanced Settings:
+   - <b>GroupId</b> : org.project
+   - <b>ArtifactId</b> : sample
+7. <code>Create</code> 버튼을 클릭하여 프로젝트를 생성합니다.
+
+
+프로젝트가 정상적으로 생성되면 다음과 같은 구조가 됩니다.
+
 ![image4](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image4.png)
+
+
 
 ![image5](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image5.png)
 
@@ -62,8 +81,6 @@
 ![image9](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image9.png)
 
 ![image10](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image10.png)
-
-![image11](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image11.png)
 
 ![image12](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image12.png)
 
