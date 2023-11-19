@@ -190,7 +190,10 @@ POM 연관 정보는 프로젝트간 연관 정보를 기술하며 관련 태그
 
 
 - 자바 툴은 플랫폼에 자유롭기 때문에 부가적인 컴파일 단계를 건너뛰려면 바이너리 버전을 내려 받는 것이 좋습니다.
-- 내려 받은 압푹 파일을 풀고 환경 변수 JAVA_HOME, PATH 값을 지정하면 설치가 끝납니다. 설치하기 전에 메이븐 런타임 구동에 필요한 자바 SDK가 PC에 제대로 설치되어 있는지 확인
+- 내려 받은 압푹 파일을 풀고 환경 변수 JAVA_HOME, path 값에 추가 지정하면 설치가 끝납니다. 설치하기 전에 메이븐 런타임 구동에 필요한 자바 SDK가 PC에 제대로 설치되어 있는지 확인
+
+![image7](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image7.png)
+
 
 ## 그레이들 명령어
 
@@ -199,6 +202,8 @@ POM 연관 정보는 프로젝트간 연관 정보를 기술하며 관련 태그
 ```
 gradle --version
 ```
+
+![image8](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image8.png)
 
 ### 프로젝트 생성 
 
