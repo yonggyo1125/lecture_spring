@@ -210,3 +210,105 @@ gradle --version
 ```
 gradle init [--type 타입명]
 ```
+
+> 프로젝트에 필요한 초기 환경을 구성한다.
+타입을 주지 않는 경우 아래의 절차대로 진행하며, 타입을 줄 경우 'build script DSL' 절차부터 진행된다.
+
+```
+Select type of project to generate:
+  1: basic
+  2: application
+  3: library
+  4: Gradle plugin
+Enter selection (default: basic) [1..4]
+
+Select implementation language:
+  1: C++
+  2: Groovy
+  3: Java
+  4: Kotlin
+  5: Scala
+  6: Swift
+Enter selection (default: Java) [1..6]
+
+Split functionality across multiple subprojects?:
+  1: no - only one application project
+  2: yes - application and library projects
+Enter selection (default: no - only one application project) [1..2] 1
+
+Select build script DSL:
+  1: Groovy
+  2: Kotlin
+Enter selection (default: Groovy) [1..2]
+
+Select test framework:
+  1: JUnit 4
+  2: TestNG
+  3: Spock
+  4: JUnit Jupiter
+Enter selection (default: JUnit 4) [1..4]
+```
+
+### basic 타입으로 생성 시 프로젝트 구조
+
+Gradle 프로젝트의 필수 환경만 제공하며, 로우레벨에서 프로젝트를 구성해야 한다.
+
+```
+.
+├── build.gradle
+├── .gradle
+├── gradle 
+│     └── wrapper 
+│           ├── gradle-wrapper.jar 
+│           └── gradle-wrapper.properties
+├── gradlew 
+├── gradlew.bat 
+├── settings.gradle 
+```
+
+- <b>.gradle 디렉토리</b> : 작업(Task) 파일이 생성된다.
+- <b>gradle 디렉토리</b> : gradle-wrapper 관련 디렉토리
+- <b>gradlew, gradlew.bat</b>
+  - gradle-wrapper 실행명령
+  - 각각 리눅스(맥) 환경과, 윈도우의 실행명령이다.
+- <b>build.gradle</b> : 프로젝트에 필요한 의존성과 빌드처리 내용을 작성하는 파일
+- <b>settings.gradle</b> : 프로젝트에 대한 설정정보를 작성하는 파일
+
+### java-application 타입으로 생성 시 프로젝트 구조
+
+Gradle 프로젝트 환경 + 자바 어플리케이션 환경이 구성되며, mainClass는 'App.java'로 설정된다. ("hello world!" 출력)
+
+```
+. 
+├── .gradle
+├── gradle 
+│     └── wrapper 
+│           ├── gradle-wrapper.jar 
+│           └── gradle-wrapper.properties
+├── gradlew 
+├── gradlew.bat 
+├── settings.gradle 
+└── app
+      ├── build.gradle
+      └── src 
+           ├── main
+           │	 └── resources
+           │     └── java
+           │           └── App.java 
+           └── test 
+                 └── resources
+                 └── java 
+                       └── AppTest.java
+```
+
+### 컴파일 및 실행 (java-application)
+
+> gradle에서 task는 프로젝트의 작업단위다.
+> gradle이 제공하는 task들이 있고, build.gradle에서 사용자가 직접 만들 수도 있다.
+> gradle이 제공하는 task의 경우 아래 명령어를 통해 확인 가능하다.
+> (프로젝트 타입에 따라 제공되는 task가 다르다.)
+
+```
+gradle tasks
+```
+
