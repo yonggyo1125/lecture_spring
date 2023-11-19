@@ -64,23 +64,25 @@
 7. <code>Create</code> 버튼을 클릭하여 프로젝트를 생성합니다.
 
 
-프로젝트가 정상적으로 생성되면 다음과 같은 구조가 됩니다.
+### 프로젝트가 정상적으로 생성되면 다음과 같은 구조가 됩니다.
 
 ![image4](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image4.png)
 
 
-File -> Project Stucture 메뉴를 선택 한 후 
+### File -> Project Stucture 메뉴를 선택 한 후 
 
 ![image5](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image5.png)
 
-SDK 버전이 다음과 같이 17로 설정되어 있는지 확인합니다.
+### SDK 버전이 다음과 같이 17로 설정되어 있는지 확인합니다.
 
 ![image6](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image6.png)
 
-
-한글 깨짐을 방지하기 위해서 File -> Settings -> Editor -> File Encodings으로 이동한 후
-
 ![image7](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image7.png)
+
+
+### 한글 깨짐을 방지하기 위해서 File -> Settings -> Editor -> File Encodings으로 이동
+
+![image8](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image8.png)
 
 1. Project Encoding -> UTF-8,
 2. Default encoding for properties files -> UTF-8
@@ -88,20 +90,19 @@ SDK 버전이 다음과 같이 17로 설정되어 있는지 확인합니다.
 4. Apply 클릭
 
 
-Build, Execution, Deploymemnt -> Build Tools -> Gradle 설정
 
-![image8](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image8.png)
+### Build, Execution, Deploymemnt -> Build Tools -> Gradle 설정
+
+![image9](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image9.png)
 
 1. Build and run using -> IntelliJ IDEA
 2. Run tests using -> IntelliJ IDEA
 3. Gradle JVM -> JDK 17로 설정되어 있는지 확인
-4. Apply 클릭 
-
-
-
-![image9](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image9.png)
+4. Apply 클릭
 
 ![image10](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image10.png)
+
+
 
 ![image12](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image12.png)
 
