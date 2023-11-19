@@ -27,7 +27,7 @@
 2. 인텔리제이 설치
     - 인텔리제이는 Ultimate 버전과 Community 버전 2가지로 다운받을 수 있다. 무료 버전은 Community 이므로 Community 버전으로 다운받아 설치한다.
     - [IDE 다운로드](https://www.jetbrains.com/ko-kr/idea/download)
-
    
+![image1](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image1.png)
 
 3. [스프링 프레임워크 API 문서](https://docs.spring.io/spring-framework/docs/current/javadoc-api/) 즐겨찾기 등록 
