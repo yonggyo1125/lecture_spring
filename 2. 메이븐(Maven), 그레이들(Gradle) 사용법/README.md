@@ -19,9 +19,9 @@
 mvn -version
 ```
 
-![image4](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image3.png)
+![image4](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image4.png)
 
-![image5](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image3.png)
+![image5](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image5.png)
 
 - 위 과정에서 실제로 입력하는 값은 다음과 같다.
   - <b>groupId</b> : 프로젝트가 속하는 그룹 식별자. 회사, 본부, 또는 단체를 의미하는 값을 입력한다. 패키지 형식으로 계층을 표현한다. 위에서는 kr.codefty를 groupId로 입력했다.
@@ -182,7 +182,14 @@ POM 연관 정보는 프로젝트간 연관 정보를 기술하며 관련 태그
 ## 그레이들 설치
 
 -  그레이들은 단독형 CLI 툴로 쓸 수 있기 때문에 다양한 개발 환경에서 활용 가능합니다. 이를테면 자바 애플리케이션 빌드 시 되풀이되는 작업(예 : 파일복사, 컴파일)을 자동화하려면 emacs, vi 등의 텍스트 편집기로 그레이들 같은 빌드 툴을 설정할 수 있어야 합니다.
-- 그레이들은 무료로 내려받을 수 있고(http://wwww.gradle.org/downloads) 예제 소스와 바이너리 버전 모두 구할 수 있습니다. 자바 툴은 플랫폼에 자유롭기 때문에 부가적인 컴파일 단계를 건너뛰려면 바이너리 버전을 내려 받는 것이 좋습니다.
+- 그레이들은 무료로 내려받을 수 있고(http://www.gradle.org/downloads) 예제 소스와 바이너리 버전 모두 구할 수 있습니다.
+- [https://gradle.org/releases/](https://gradle.org/releases/)
+- [Gradle Build Language Reference](https://docs.gradle.org/8.4/dsl/index.html)
+
+![image6](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image6.png)
+
+
+- 자바 툴은 플랫폼에 자유롭기 때문에 부가적인 컴파일 단계를 건너뛰려면 바이너리 버전을 내려 받는 것이 좋습니다.
 - 내려 받은 압푹 파일을 풀고 환경 변수 JAVA_HOME, PATH 값을 지정하면 설치가 끝납니다. 설치하기 전에 메이븐 런타임 구동에 필요한 자바 SDK가 PC에 제대로 설치되어 있는지 확인
 
 ## 그레이들 명령어
