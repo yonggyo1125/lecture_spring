@@ -317,7 +317,7 @@ gradle tasks
 
 ### 프로젝트 빌드
 
-```yaml
+```
 gradle build
 ```
 
@@ -325,3 +325,131 @@ gradle build
 - build.gradle에 apply plugin: 'java'가 추가된 경우 .jar파일로 패키징까지 된다.
 - 컴파일된 파일들은 'app > build' 폴더 안에 생성되며, .jar파일은 'build > libs'에 패키징된다.
 
+![image10](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image10.png)
+
+![image11](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image11.png)
+
+### 프로젝트 실행
+
+```
+gradle run
+```
+
+- 컴파일 후 메인클래스를 실행한다.
+- 스프링부트의 경우 <code>gradle bootRun</code>을 통해 앱을 구동할 수 있다.
+
+![image12](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image12.png)
+
+
+### 프로젝트 패키징
+
+```
+gradle jar
+```
+
+- 프로그램을 .jar로 패키징
+- 'build > libs'에 생성된다.
+- <code>apply plugin</code>: 'java'가 추가된 경우 build명령으로 해결가능
+
+
+### 프로젝트 클린
+
+```
+gradle clean
+```
+
+- build 폴더를 제거하여, 빌드 이전 상태로 되돌린다.
+
+### gradle-wrapper
+
+- 'gradle' 명령어로 프로젝트를 빌드할 수 있지만, gradle-wrapper의 실행명령으로도 task를 실행할 수 있다. 
+- gradle 대신 wrapper를 사용하는 이유
+  - 새로운 환경에서 gradle을 설치하지 않고도 빌드가 가능
+  - gradle 명령어의 경우 기본적으로 gradle이 로컬에 설치가 되어있어야 한다. <br>또한 gradle 명령어로 빌드를 할 경우 로컬에 설치된 gradle 버젼으로 빌드되기 때문에, 개발 당시 버젼과 다를경우 문제를 일으킬 수도 있다.
+  - <code>gradlew build</code>를 사용하면 사용자가 프로젝트를 만든 사람과 동일한 버전으로 빌드를 할 수 있으며, 심지어 gradle이 설치되지 않아도 빌드가 가능하다.
+
+```
+gradlew [task명]
+```
+
+## build.gradle 
+
+> 다음은 스프링부트 웹 애플리케이션의 기본환경 설정이다.
+
+```groovy
+buildscript {
+    ext {
+        springBootVersion = '2.3.7.RELEASE'
+        lombokVersion = '1.18.10'
+    }
+    repositories {
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+group 'gradle.test.javaapp'
+version '1.0-SNAPSHOT'
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    // api '...'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    // runtimeOnly '...'
+
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+}
+```
+
+- buildscript 
+  - gradle로 task 실행 시 사용되는 설정
+  - 어플리케이션 빌드와는 별개 설정(위 설정과 같이 <code>repositories</code>, <code>dependencies</code>를 따로 설정)
+- ext 
+  - 전역변수 블록
+  - 전역변수는 <code>$전역변수명</code>으로 사용할 수 있다.
+- classpath
+  - 라이브러리를 클래스 경로에 추가 
+  - 빌드에서 실행까지 의존하는 라이브러리를 지정
+- plugin
+  - 프로젝트에서 사용하는 Gradle 플러그인을 추가<br>(위에 설정된 플러그인들은 부트 환경에 필요한 플러그인)
+  - eclipse: eclipse IDE 에서도 Gradle Project를 개발할 수 있도록 플러그인이 설치된다.
+- group : 프로젝트 생성시 groupId 설정
+- version : 애플리케이션 버전 설정
+- sourceCompatibility: 자바 버전 설정
+- repositories
+  - 필요한 라이브러리를 다운로드할 저장소를 지정
+  - 공개저장소(jcenter)와, maven저장소를 사용할 수 있다.
+  - 상호보완 되도록 둘 다 사용하는 것을 권장
+- dependencies : 라이브러리 추가
+  - compile, api
+    - 모듈 수정 시, 해당 모듈을 의존하고 있는 모듈을 모두 빌드, 빌드 속도가 느리다 
+    - <code>compile</code>의 경우 Gradle 3.0부터는 사용을 권장하지 않는다(<code>api</code>로 대체)
+    - A(api) <- B <- C로 의존하는 형태라면 A 수정 시 B,C 모두 빌드 
+  - implementation
+    - 모듈 수정 시, 직접 의존하는 모듈만 빌드, 빌드 속도가 비교적 빠르다.
+    - A(implementation) <- B <- C로 의존하는 구조라면, A 수정 시 B만 빌드
+  - testImplementation : 테스트에 사용하는 라이브러리 추가 
+  - annotationProcessor : 어노테이션 기반 라이브러리를 컴파일러가 인식하도록 함 예) <code>lombok</code>, <code>queryDSL</code>
+  - compileOnly : complie에만 필요하고, runtime에는 필요없는 라이브러리를 추가
+  - runtimeOnly : compile시에는 필요하지 않지만 runtime시에는 필요한 라이브러리 추가
+  - developmentOnly : 개발시에만 필요하고 compile시에는 제거 예) <code>springboot devtools</code>
+  
