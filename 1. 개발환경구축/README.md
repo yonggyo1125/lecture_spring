@@ -100,7 +100,48 @@
 3. Gradle JVM -> JDK 17로 설정되어 있는지 확인
 4. Apply 클릭
 
+
+### build.gradle 파일
+
 ![image10](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image10.png)
+
+1. 자바 버전 및 annotationProcessor 설정 추가
+
+```groovy
+plugins {
+    id 'java'
+}
+
+group 'org.project'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework:spring-context:6.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+```
+
+2. Sync 아이콘 클릭 : 변경 사항 반영 
+
 
 
 
