@@ -205,7 +205,7 @@ C:\Users\YONGGYO\.m2\repository\org\springframework\spring-context\6.1.0\spring-
 
 ![image16](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image16.png)
 
-- 계층도를 보면 가장 상위 BeanFactory 인터페이스가 위치하고, 위에서 세 번째에 <code>ApplicationContext</code> 인터페이스, 그리고 가장 하단에 <code>AnnotationConfigApplicationContext</code>등의 구현 클래스가 위치한다. 
+- 계층도를 보면 가장 상위 <code>BeanFactory</code> 인터페이스가 위치하고, 위에서 세 번째에 <code>ApplicationContext</code> 인터페이스, 그리고 가장 하단에 <code>AnnotationConfigApplicationContext</code>등의 구현 클래스가 위치한다. 
 
 - <code>BeanFactory</code> 인터페이스는 객체 생성과 검색에 대한 기능을 정의한다. 예를 들어 생성된 객체를 검색하는데 필요한 <code>getBean()</code> 메서드가 BeanFactory에 정의되어 있다. 객체를 검색하는 것 이외에 싱글톤/프로토타입 빈인지 확인하는 기능도 제공한다.
 
