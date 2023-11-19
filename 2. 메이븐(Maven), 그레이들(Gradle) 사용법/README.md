@@ -13,7 +13,53 @@
 
 ![image3](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image3.png)
 
+- 명령 프롬프트([시작]->[모든 프로그램]->[보조 프로그램]->[명령 프롬프트])를 실행한 뒤 다음과 같이 mvn 명령어를 입력한다.(시작 메뉴의 검색창에 cmd라고 입력하여 명령 프롬프트를 실행해도 된다.)
 
+```
+mvn -version
+```
+
+![image4](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image3.png)
+
+![image5](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95/images/image3.png)
+
+- 위 과정에서 실제로 입력하는 값은 다음과 같다.
+  - <b>groupId</b> : 프로젝트가 속하는 그룹 식별자. 회사, 본부, 또는 단체를 의미하는 값을 입력한다. 패키지 형식으로 계층을 표현한다. 위에서는 kr.codefty를 groupId로 입력했다.
+  - <b>artifactId</b> : 프로젝트 결과물의 식별자. 프로젝트나 모듈을 의미하는 값이 온다. 위에서는 sample을 artifactId로 입력했다.
+  - <b>version</b> : 결과물의 버전을 입력한다. 위에서는 기본 값인 1.0-SNAPSHOT을 사용했다.
+  - <b>package</b> : 생성할 패키지를 입력한다. 별도로 입력하지 않을 경우 groupId와 동일한 구조의 패키지를 생성한다.
+
+## 메이븐 프로젝트의 기본 디렉토리 구조
+
+- archetype:generate이 성공적으로 실행되면 artifactId에 입력한 값과 동일한 이름의 폴더가 생성된다. 위 경우는 sample이라는 하위 폴더가 생성된다. 생성되는 폴더는 다음과 같다
+
+```
+sample
+    src
+        main
+            java
+                kr
+                    codefty
+                        App.java
+            test
+                java
+                    kr
+                        codefty
+                            AppTest.java
+pom.xml
+```
+
+## 메이븐 프로젝트의 주요 디렉토리 구조 
+
+- <b>src/main/java</b> : 자바 소스 파일이 위치한다.
+- <b>src/main/resources</b> : 프로퍼티나 XML 등 리소스 파일이 위치한다. 클래스패스에 포함된다.
+- <b>src/main/webapp</b> : 웹 어플리케이션 관련 파일이 위치한다. (WEB-INF 폴더, JSP 파일 등)
+- <b>src/test/java</b> : 테스트 자바 소스 파일이 위치한다.
+- <b>src/test/resources</b> : 테스트 과정에서 사용되는 리소스 파일이 위치한다. 테스트에 사용되는 클래스패스에 포함된다.
+
+> 자동 생성되지 않은 디렉토리는 직접 생성하면 된다. 예를 들어 src/main 디렉토리에 resources 디렉토리를 생성하면 메이븐은 리소스 디렉토리로 인식한다.
+
+## 자바 버전 수정
 
 
 
