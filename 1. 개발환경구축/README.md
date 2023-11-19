@@ -35,3 +35,14 @@
 ![image1](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image1.png)
 
 3. [스프링 프레임워크 API 문서](https://docs.spring.io/spring-framework/docs/current/javadoc-api/) 즐겨찾기 등록 
+
+![image2](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image2.png)
+
+# 메이븐 및 그레이들 사용방법 알아보기
+
+- [학습 URL](https://github.com/yonggyo1125/lecture_spring/tree/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95)
+
+
+# 스프링 프로젝트 생성하기
+
+# 그레이들 프로젝트 생성 
