@@ -69,10 +69,21 @@
 ![image4](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image4.png)
 
 
+File -> Project Stucture 메뉴를 선택 한 후 
 
 ![image5](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image5.png)
 
+SDK 버전이 다음과 같이 17로 설정되어 있는지 확인합니다.
+
 ![image6](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image6.png)
+
+한글 깨짐을 방지하기 위해서 File -> Settings -> Editor -> File Encodings으로 이동한 후
+- 1. Project Encoding -> UTF-8,
+- 2. Default encoding for properties files -> UTF-8
+- 3. Path에 src 디렉토리 를 선택
+- 4. Apply 클릭
+
+
 
 ![image7](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image7.png)
 
