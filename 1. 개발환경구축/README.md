@@ -19,3 +19,15 @@
 
 # 개발환경 구축하기
 
+1. JDK 설치 및 JAVA_HOME 환경 변수 설정
+
+> 인텔리제이, 이클립스 사용시 내장된 openjdk를 사용한다면 별도 JDK를 설치할 필요는 없다.
+> IDE를 통한 설치가 아닌 maven 또는 gradle 명령어를 통한 직접 프로젝트 생성시에는 JDK 설치 및 JAVA_HOME 환경 변수 설정 필요
+
+2. 인텔리제이 설치
+    - 인텔리제이는 Ultimate 버전과 Community 버전 2가지로 다운받을 수 있다. 무료 버전은 Community 이므로 Community 버전으로 다운받아 설치한다.
+    - [IDE 다운로드](https://www.jetbrains.com/ko-kr/idea/download)
+
+   
+
+3. [스프링 프레임워크 API 문서](https://docs.spring.io/spring-framework/docs/current/javadoc-api/) 즐겨찾기 등록 
