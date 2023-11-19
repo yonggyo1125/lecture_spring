@@ -24,6 +24,10 @@
 > 인텔리제이, 이클립스 사용시 내장된 openjdk를 사용한다면 별도 JDK를 설치할 필요는 없다.
 > IDE를 통한 설치가 아닌 maven 또는 gradle 명령어를 통한 직접 프로젝트 생성시에는 JDK 설치 및 JAVA_HOME 환경 변수 설정 필요
 
+- [JDK 다운로드](https://www.oracle.com/kr/java/technologies/downloads/)
+
+> 실습에서 진행하게될 스프링 버전은 6버전을 사용합니다. 6버전의 JDK 컴파일 버전은 17이므로 최소한 17버전 이상을 설치하여야 정상적인 실습이 가능합니다. 
+
 2. 인텔리제이 설치
     - 인텔리제이는 Ultimate 버전과 Community 버전 2가지로 다운받을 수 있다. 무료 버전은 Community 이므로 Community 버전으로 다운받아 설치한다.
     - [IDE 다운로드](https://www.jetbrains.com/ko-kr/idea/download)
