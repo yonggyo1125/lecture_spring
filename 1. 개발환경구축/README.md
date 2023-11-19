@@ -143,14 +143,41 @@ test {
 2. Sync 아이콘 클릭 : 변경 사항 반영 
 
 
-
+## Gradle 의존 설정 
 
 ![image12](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image12.png)
 
+1. [Maven Repository](https://mvnrepository.com) 에서 <code>Spring Context</code> 키워드로 검색합니다.
+2. <code>Spring Context</code>를 클릭 합니다.
+
 ![image13](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image13.png)
+
+1. 현 시점의 최신 버전은 <code>6.1</code> 입니다. 
+2. <code>6.1.0</code>를 클릭합니다. 
 
 ![image14](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image14.png)
 
+1. Gradle (Short) 탭을 클릭합니다.
+2. <code>implementation 'org.springframework:spring-context:6.1.0'</code>를 복사합니다.
+
+3. build.gradle 파일의 dependencies 하위 요소로 추가합니다.
+
+```groovy
+
+...
+
+dependencies {
+    implementation 'org.springframework:spring-context:6.1.0'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+... 
+
+```
+4. Sync 아이콘을 클릭하여 반영합니다.
+
+
 ![image15](https://raw.githubusercontent.com/yonggyo1125/lecture_spring/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95/images/image15.png)
 
-
+> 반영이 완료되면 <code>External Libraries</code>에 위와 같은 spring context 의존성 및 spring context가 의존하고 있는 하위 의존성까지 함께 반영된 것을 확인 할 수 있습니다. 
