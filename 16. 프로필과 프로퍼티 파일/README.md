@@ -1,1 +1,3 @@
-강의
+# 프로필과 프로퍼티 파일
+
+- [강의자료](https://github.com/yonggyo1125/curriculum300H/tree/main/6.Spring%20%26%20Spring%20Boot(75%EC%8B%9C%EA%B0%84)/10%EC%9D%BC%EC%B0%A8(3h)%20-%20%ED%8C%8C%EC%9D%BC%20%EC%97%85%EB%A1%9C%EB%93%9C(MultipartFile)%2C%20%ED%94%84%EB%A1%9C%ED%95%84%EA%B3%BC%20%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0%20%ED%8C%8C%EC%9D%BC#%ED%94%84%EB%A1%9C%ED%95%84%EA%B3%BC-%ED%94%84%EB%A1%9C%ED%8D%BC%ED%8B%B0-%ED%8C%8C%EC%9D%BC)
