@@ -158,3 +158,94 @@ public interface BoardMapper {
 
 ### CREATE(INSERT) 처리
 
+> BOARD 테이블은 PK 컬럼으로 bno를 이용하고, 시퀀스를 이용해서 자동으로 데이터가 추가될 때 번호가 만들어지는 방식을 사용합니다. 이처럼 자동으로 PK 값이 정해지는 경우에는 다음과 같은 2가지 방식으로 처리할 수 있습니다.
+
+- INSERT만 처리되고 생성된 PK 값을 알 필요가 없는 경우
+- INSERT문이 실행되고 생성된 PK 값을 알아야 하는 경우 
+
+> BoardMapper 인터페이스에는 위의 상황들을 고려해서 다음과 같이 메서드를 추가 선택합니다.
+
+```java
+package org.choongang.mapper;
+
+import org.choongang.domain.BoardVO;
+
+import java.util.List;
+
+public interface BoardMapper {
+
+    //@Select("SELECT * FROM BOARD WHERE BNO > 0")
+    List<BoardVO> getList();
+
+    void insert(BoardVO board);
+    void insertSelectKey(BoardVO board);
+}
+```
+
+> BoardMapper.xml에 다음과 같은 내용을 추가합니다.
+
+> MySQL기준 
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.choongang.mapper.BoardMapper">
+
+    <select id="getList" resultType="org.choongang.domain.BoardVO">
+        <![CDATA[
+            SELECT * FROM BOARD WHERE BNO > 0
+        ]]>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO BOARD (TITLE, CONTENT, WRITER)
+        VALUES (#{title}, #{content}, #{writer})
+    </insert>
+
+    <insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="bno">
+        INSERT INTO BOARD (TITLE, CONTENT, WRITER)
+        VALUES (${title}, #{content}, #{writer})
+    </insert>
+
+</mapper>
+```
+
+> Oracle 기준 
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.choongang.mapper.BoardMapper">
+
+    <select id="getList" resultType="org.choongang.domain.BoardVO">
+        <![CDATA[
+            SELECT * FROM BOARD WHERE BNO > 0
+        ]]>
+    </select>
+
+    <insert id="insert">
+        INSERT INTO BOARD (BNO, TITLE, CONTENT, WRITER)
+        VALUES (SEQ_BOARD.nextval, #{title}, #{content}, #{writer})
+    </insert>
+
+    <insert id="insertSelectKey">
+        <selectKey keyProperty="bno" order="BEFORE" resultType="long">
+            SELECT SEQ_BOARD.nextval FROM DUAL
+        </selectKey>
+
+        INSERT INTO BOARD (BNO, TITLE, CONTENT, WRITER)
+        VALUES (#{bno}, ${title}, #{content}, #{writer})
+    </insert>
+    
+</mapper>
+```
+
+> BoardMapper의 insert()는 단순히 시퀀스의 다음 값을 구해서 insert 할 때 사용합니다. insert문은 몇 건의 데이터가 변경되었는지만을 알려주기 때문에 데이터의 PK 값을 알 수는 없지만, 1번의 SQL 처리만으로 작업이 완료되는 장점이 있습니다.
+> 
+> insertSelectKey()는 <code>@SelectKey</code>라는 MyBatis의 어노테이션을 이용합니다. <code>@SelectKey</code>는 주로 PK 값을 미리(before) SQL을 통해서 처리해 두고 특정한 이름으로 결과를 보관하는 방식입니다. <code>@Insert</code>할 때 SQL문을 보면 #{bno}와 같이 값이 이미 처리된 결과를 이용하는 것을 볼 수 있습니다.
+
+

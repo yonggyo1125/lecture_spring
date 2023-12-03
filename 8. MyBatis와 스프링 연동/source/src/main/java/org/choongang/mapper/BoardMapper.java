@@ -8,4 +8,7 @@ public interface BoardMapper {
 
     //@Select("SELECT * FROM BOARD WHERE BNO > 0")
     List<BoardVO> getList();
+
+    void insert(BoardVO board);
+    void insertSelectKey(BoardVO board);
 }

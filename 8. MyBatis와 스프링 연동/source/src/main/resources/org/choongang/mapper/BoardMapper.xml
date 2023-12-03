@@ -10,4 +10,14 @@
         ]]>
     </select>
 
+    <insert id="insert">
+        INSERT INTO BOARD (TITLE, CONTENT, WRITER)
+        VALUES (#{title}, #{content}, #{writer})
+    </insert>
+
+    <insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="bno">
+        INSERT INTO BOARD (TITLE, CONTENT, WRITER)
+        VALUES (${title}, #{content}, #{writer})
+    </insert>
+
 </mapper>
