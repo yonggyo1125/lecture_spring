@@ -473,3 +473,101 @@ public class DataSourceTests {
 > <code>Mapper</code>는 쉽게 말해서 SQL과 그에 대한 처리를 지정하는 역할을 합니다. <code>MyBatis-Spring</code>을 이용하는 경우에는 <code>Mapper</code>를 <code>XML</code>과 <code>인터페이스</code> + <code>어노테이션</code>의 형태로 작성할 수 있습니다.
 
 ### Mapper 인터페이스
+
+> Mapper를 작성하는 방법은 XML을 이용할 수도 있지만 최소한의 코드를 작성하는 <code>Mapper 인터페이스</code>를 사용할 수도 있습니다.
+> 
+> org.choongang.mapper라는 패키지를 만들고, TimeMapper라는 인터페이스를 추가합니다.
+> 
+> TimeMapper 인터페이스에는 MyBatis의 어노테이션을 이용해서 SQL을 메서드에 추가합니다.
+
+
+> MySQL 기준 
+
+```java
+package org.choongang.mapper;
+
+import org.apache.ibatis.annotations.Select;
+
+public interface TimeMapper {
+
+    @Select("SELECT CURRENT_TIMESTAMP")
+    String getTime();
+}
+```
+
+> Oracle 기준
+
+```java
+package org.choongang.mapper;
+
+import org.apache.ibatis.annotations.Select;
+
+public interface TimeMapper {
+
+    @Select("SELECT SYSDATE FROM DUAL")
+    String getTime();
+}
+
+```
+
+#### Mapper 설정
+
+> Mapper를 작성해 주었다면 MyBatis가 동작할 때 Mapper를 인식할 수 있도록 클래스 선언부에 <code>mybatis-spring</code>에서 사용하는 <code>@MapperScan</code>를 이용해서 처리합니다. 
+
+```java
+package org.choongang.configs;
+
+...
+
+@Configuration
+@MapperScan("org.choongang.mapper")
+public class DbConfig {
+    ...
+}
+```
+
+#### Mapper 테스트 
+
+> <code>MyBatis-Spring</code>은 <code>Mapper 인터페이스</code>를 사용해서 실제 SQL 처리가 되는 클래스를 자동으로 생성합니다. 따라서 개발자들은 인터페이스와 SQL만을 작성하는 방식으로도 모든 JDBC 처리를 끝낼 수 있습니다.
+> 
+> 작성한 TimeMapper를 테스트하는 코드는 src/test/java 하위 org.choongang.TimeMapperTests라는 클래스를 생성해서 처리합니다.
+
+```java
+package org.choongang;
+
+import org.choongang.configs.DbConfig;
+import org.choongang.mapper.TimeMapper;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = DbConfig.class)
+public class TimeMapperTests {
+
+    @Autowired
+    private TimeMapper timeMapper;
+
+    @Test
+    public void testGetTime() {
+        System.out.println(timeMapper.getClass().getName());
+        System.out.println(timeMapper.getTime());
+    }
+}
+```
+
+> <code>TimeMapperTests</code> 클래스는 <code>TimeMapper</code>가 정상적으로 사용이 가능한지를 알아보기 위한 테스트 코드입니다. 위의 코드가 정상적으로 동작한다면 스프링 내부에는 TimeMapper 타입으로 만들어진 스프링 객체(빈)가 존재한다는 뜻이 됩니다.
+> 
+> 위 코드에서 <code>timeMapper.getClass().getName()은 실제 동작하는 클래스의 이름을 확인해 주는데 실행 결과를 보면 개발 시 인터페이스만 만들어 주었는데 내부적으로 적당한 클래스가 만들어진 것을 확인할 수 있습니다.</code>
+> 우선 스프링이 인터페이스를 이용해서 객체를 생성한다는 사실에 주목하세요.
+
+
+### XML 매퍼와 함께 사용
+
+> MyBatis를 이용해서 SQL을 처리할 때 어노테이션을 이용하는 방식이 압도적으로 편리하기는 하지만, SQL이 복잡하거나 길어지는 경우에는 어노테이션 보다는 XML을 이용하는 방식을 더 선호하게 됩니다. 다행히도 <code>MyBatis-Spring</code>의 경우 <code>Mapper 인터페이스</code>와 <code>XML</code>을 동시에 이용할 수 있습니다.
+> 
+> XML을 작성해서 사용할 때에는 XML 파일의 위치와 XML 파일에 지정하는 namespace 속성이 중요한데, XML 파일 위치의 경우 Mapper 인터페이스가 있는 곳에 같이 작성하거나 <code>src/main/resources</code> 구조에 XML을 저장할 폴더를 생성할 수 있습니다. XML 파일을 만들 때 이름에 대한 규칙은 없지만, 가능하다면 Mapper 인터페이스와 같은 이름을 이용하는 것이 가독성을 높여줍니다.
+> 
+> <code>src/main/resources</code> 폴더 내 org 폴더와 하위 choongang 폴더, mapper 폴더를 생성하고 <code>TimeMapper.xml</code>를 생성합니다.

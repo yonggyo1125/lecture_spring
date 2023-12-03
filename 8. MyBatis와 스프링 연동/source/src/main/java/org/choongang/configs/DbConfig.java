@@ -3,11 +3,13 @@ package org.choongang.configs;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
+import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 
 @Configuration
+@MapperScan("org.choongang.mapper")
 public class DbConfig {
     @Bean(destroyMethod = "close")
     public DataSource dataSource() {
