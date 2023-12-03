@@ -20,4 +20,10 @@ public class TimeMapperTests {
         System.out.println(timeMapper.getClass().getName());
         System.out.println(timeMapper.getTime());
     }
+
+    @Test
+    public void testGetTime2() {
+        System.out.println(timeMapper.getClass().getName());
+        System.out.println(timeMapper.getTime());
+    }
 }

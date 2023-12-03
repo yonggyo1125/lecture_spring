@@ -603,6 +603,7 @@ public class TimeMapperTests {
 </mapper>
 ```
 
+  
 
 
 > Mapper 인터페이스와 XML을 함께 이용해 보기 위해서 기존의 TimeMapper 인터페이스에 추가적인 메서드를 선언합니다.
@@ -625,3 +626,24 @@ public interface TimeMapper {
 ```
 
 > TimeMapper 인터페이스를 보면 getTime2()가 추가된 것을 볼 수 있는데 특이하게도 <code>@Select</code>와 같이 MyBatis 어노테이션이 존재하지 않고 SQL 역시 존재하지 않는 것을 볼수 있습니다.
+>
+>  XML 매퍼를 이용할 때 신경 써야 하는 부분은 <code>\<mapper\></code> 태그의 <code>namespace</code> 속성값입니다. MyBatis는 Mapper 인터페이스와 XML을 인터페이스의 이름과 namespace 속성 값을 가지고 판단합니다. 위와 같이 <code>org.choongang.mapper.TimeMapper</code> 인터페이스가 존재하고, XML의 \<mapper namespace="org.choongang.mapper.TimeMapper"\>와 동일한 이름이 존재하면, 이를 병합해서 처리합니다. 따라서 위의 경우 메서드 선언은 인터페이스에 존재하고 SQL에 대한 처리는 XML을 이용하는 방식이라고 볼 수 있습니다.
+> 
+> \<select\> 태그의 id 속성의 값은 메서드의 이름과 동일하게 맞춰야 합니다. \<select\> 태그의 경우 <code>resultType</code> 속성을 가지는데 이 값은 인터페이스에 선언된 메서드의 리턴 타입과 동일하게 작성합니다.
+> 
+> 최종적인 확인을 위해서 TimeMapperTests 클래스를 이용해서 테스트 작업을 진행해야 합니다.
+
+```java 
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = DbConfig.class)
+public class TimeMapperTests {
+
+    ...
+
+    @Test
+    public void testGetTime2() {
+        System.out.println(timeMapper.getClass().getName());
+        System.out.println(timeMapper.getTime());
+    }
+}
+```
