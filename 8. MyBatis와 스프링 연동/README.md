@@ -114,9 +114,123 @@ public class JDBCTests {
 
 ### Tomcat JDBC를 사용한 설정 
 
+> build.gradle에 <code>tomcat-jdbc</code> 의존성 추가 
+
+```groovy
+dependencies {
+    def spring_version= '6.1.1'
+
+    ...
+    
+    implementation 'org.apache.tomcat:tomcat-jdbc:10.1.16'
+    
+    ...
+}
+```
+
+> <code>DataSource</code> 설정
+> org.choongang.cofigs.DbConfig.java
+
+> MySQL 기준
+> 
+```java
+package org.choongang.configs;
+
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 
 
+@Configuration
+public class DbConfig {
+    @Bean
+    public DataSource dataSource() {
+       DataSource ds = new DataSource();
+
+       ds.setDriverClassName("com.mysql.cj.jdbc.Driver");
+       ds.setUrl("jdbc:mysql://localhost:3306/teamb2");
+       ds.setUsername("teamb2");
+       ds.setPassword("_aA123456");
+
+       ds.setMaxActive(10);
+       ds.setInitialSize(2);
+       ds.setTestWhileIdle(true);
+       ds.setMinEvictableIdleTimeMillis(60 * 1000);
+       ds.setTimeBetweenEvictionRunsMillis(5 * 1000);
+
+       return ds;
+    }
+}
+```
+
+> Oracle 기준
+
+```java
+package org.choongang.configs;
+
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
+@Configuration
+public class DbConfig {
+    @Bean
+    public DataSource dataSource() {
+       DataSource ds = new DataSource();
+
+       ds.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+       ds.setUrl("jdbc:oracle:thin:@localhost:1521:orcl");
+       ds.setUsername("TEAMB2");
+       ds.setPassword("_aA123456");
+
+       ds.setMaxActive(10);
+       ds.setInitialSize(2);
+       ds.setTestWhileIdle(true);
+       ds.setMinEvictableIdleTimeMillis(60 * 1000);
+       ds.setTimeBetweenEvictionRunsMillis(5 * 1000);
+
+       return ds;
+    }
+}
+```
+
+> 연결 테스트 - <code>DataSourceTests</code> 클래스를 다음과 같이 작성합니다.
+
+```java
+package org.choongang;
+
+
+import org.choongang.configs.DbConfig;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes=DbConfig.class)
+public class DataSourceTests {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Test
+    public void testConnection() {
+        try (Connection con = dataSource.getConnection()) {
+            System.out.println(con);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+     }
+}
+```
 
 ### HikariCP를 사용한 설정 
 
 > 커넥션 풀은 여러 종류가 있고 <code>spring-jdbc</code> 라이브러리를 이용하는 방식도 있지만, HikariCP가 최근 부터 유행하고 있습니다. HikariCP는 스프링 부트 2.0 버전 이후 부터 기본 사용될 만큼 빠르게 퍼지고 있습니다.
+
