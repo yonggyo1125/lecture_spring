@@ -132,7 +132,7 @@ dependencies {
 > org.choongang.cofigs.DbConfig.java
 
 > MySQL 기준
-> 
+
 ```java
 package org.choongang.configs;
 
@@ -233,4 +233,110 @@ public class DataSourceTests {
 ### HikariCP를 사용한 설정 
 
 > 커넥션 풀은 여러 종류가 있고 <code>spring-jdbc</code> 라이브러리를 이용하는 방식도 있지만, HikariCP가 최근 부터 유행하고 있습니다. HikariCP는 스프링 부트 2.0 버전 이후 부터 기본 사용될 만큼 빠르게 퍼지고 있습니다.
+
+> build.gradle에 <code>HikariCP</code> 의존성 추가
+
+```groovy
+dependencies {
+    def spring_version= '6.1.1'
+    ...
+    
+    implementation 'com.zaxxer:HikariCP:5.1.0'
+    
+    ...
+}
+```
+
+> <code>DataSource</code> 설정
+> org.choongang.cofigs.DbConfig2.java
+
+> MySQL 기준
+
+```java
+package org.choongang.configs;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class DbConfig2 {
+    @Bean(destroyMethod = "close")
+    public DataSource dataSource() {
+        HikariConfig config = new HikariConfig();
+        config.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        config.setJdbcUrl("jdbc:mysql://localhost:3306/teamb2");
+        config.setUsername("teamb2");
+        config.setPassword("_aA123456");
+
+        HikariDataSource dataSource = new HikariDataSource(config);
+        return dataSource;
+    }
+}
+```
+
+> Oracle 기준
+ 
+```java
+package org.choongang.configs;
+
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+import javax.sql.DataSource;
+
+@Configuration
+public class DbConfig2 {
+@Bean(destroyMethod = "close")
+public DataSource dataSource() {
+HikariConfig config = new HikariConfig();
+config.setDriverClassName("oracle.jdbc.driver.OracleDriver");
+config.setJdbcUrl("jdbc:oracle:thin:@localhost:1521:orcl");
+config.setUsername("TEAMB2");
+config.setPassword("_aA123456");
+
+        HikariDataSource dataSource = new HikariDataSource(config);
+        return dataSource;
+    }
+}
+```
+
+> 연결 테스트 - <code>DataSourceTests2</code> 클래스를 다음과 같이 작성합니다.
+
+```java
+package org.choongang;
+
+import org.choongang.configs.DbConfig2;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes= DbConfig2.class)
+public class DataSourceTests2 {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Test
+    public void testConnection() {
+        try (Connection con = dataSource.getConnection()) {
+            System.out.println(con);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
+```
 
