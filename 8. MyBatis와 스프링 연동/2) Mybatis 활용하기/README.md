@@ -109,7 +109,7 @@ public class BoardMapperTests {
 }
 ```
 
-#### ssrc/main/resources/org/choongang/mapper/BoardMapper.xml
+#### src/main/resources/org/choongang/mapper/BoardMapper.xml
 
 > BoardMapperTests를 이용해서 테스트가 완료되었다면 <code>src/main/resources</code>내에 패키지와 동일한 <code>org/choongang/mapper</code> 단계의 폴더를 생성하고 XML 파일을 작성합니다(폴더를 한 번에 생성하지 말고 하나씩 생성해야 하는 점 주의).
 > 
@@ -148,4 +148,13 @@ public interface BoardMapper {
 ```
 
 > 인터페이스 수정 후에는 반드시 기존 테스트 코드를 통해서 기존과 동일하게 동작하는지 확인해야 합니다.
+
+
+## 영속 영역의 CRUD 구현
+
+> 웹 프로젝트는 구조에서 마지막 영역이 영속 영역이지만, 실제로 구현을 가장 먼저 할 수 있는 영역도 영속 영역입니다. 영속 영역은 기본적으로 CRUD 작업을 하기 때문에 테이블과 VO(DTO) 등 약간의 준비만으로도 비즈니스 로직과 무관하게 CRUD 작업을 작성할 수 있습니다. 
 > 
+> MyBatis는 내부적으로 JDBC의 PreparedStatement를 활용하고 필요한 파라미터를 처리하는 '?'에 대한 치환은 '#{속성}'을 이용해서 처리합니다.
+
+### CREATE(INSERT) 처리
+
