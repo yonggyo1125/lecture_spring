@@ -1,0 +1,32 @@
+plugins {
+    id 'java'
+}
+
+group 'org.project'
+version '1.0-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    def spring_version= '6.1.1'
+
+    implementation "org.springframework:spring-context:${spring_version}"
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    runtimeOnly 'com.mysql:mysql-connector-j:8.0.33'
+    compileOnly 'org.projectlombok:lombok:1.18.30'
+    testCompileOnly 'org.projectlombok:lombok:1.18.30'
+    testImplementation "org.springframework:spring-test:${spring_version}"
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+}
+
+test {
+    useJUnitPlatform()
+}
