@@ -76,7 +76,76 @@ import java.util.List;
 public interface BoardMapper {
 
     @Select("SELECT * FROM BOARD WHERE BNO > 0")
-    public List<BoardVO> getList();
+    List<BoardVO> getList();
 }
 ```
 
+#### src/test/java/org/choongang/BoardMapperTests.java 
+
+> 작성된 BoardMapper 인터페이스를 테스트할 수 있게 테스트 환경인 'src/test/java'에 'org.choongang' 패키지를 작성하고 BoardMapperTests 클래스를 추가합니다.
+
+```java
+package org.choongang;
+
+import org.choongang.configs.DbConfig;
+import org.choongang.mapper.BoardMapper;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes = DbConfig.class)
+public class BoardMapperTests {
+
+    @Autowired
+    private BoardMapper mapper;
+
+    @Test
+    public void testGetList(){
+        mapper.getList().forEach(System.out::println);
+    }
+}
+```
+
+#### ssrc/main/resources/org/choongang/mapper/BoardMapper.xml
+
+> BoardMapperTests를 이용해서 테스트가 완료되었다면 <code>src/main/resources</code>내에 패키지와 동일한 <code>org/choongang/mapper</code> 단계의 폴더를 생성하고 XML 파일을 작성합니다(폴더를 한 번에 생성하지 말고 하나씩 생성해야 하는 점 주의).
+> 
+> 파일의 폴더 구조나 이름은 무방하지만 패키지와 클래스 이름과 동일하게 해주면 나중에 혼란스러운 상황을 피할 수 있습니다.
+
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.choongang.mapper.BoardMapper">
+
+    <select id="getList" resultType="org.choongang.domain.BoardVO">
+        <![CDATA[
+            SELECT * FROM BOARD WHERE BNO > 0
+        ]]>
+    </select>
+    
+</mapper>
+```
+
+> XML을 작성할 때는 반드시 \<mapper\>와 namespace 속성값을 Mapper 인터페이스와 동일한 이름을 주는 것에 주의하고, \<select\> 태그의 id 속성값은 메서드의 이름과 일치하게 작성합니다. resultType 속성의 값은 select 쿼리의 결과를 특정 클래스의 객체로 만들기 위해서 설정합니다. XML에 사용한 CDATA 부분은 XML에서 부등호를 사용하기 위해서 사용합니다.
+> 
+> XML에 SQL문이 처리되었으미 BoardMapper 인터페이스에 SQL은 제거합니다.
+
+
+#### src/test/java/org/choongang/BoardMapperTests.java 
+
+```java
+public interface BoardMapper {
+
+    //@Select("SELECT * FROM BOARD WHERE BNO > 0")
+    List<BoardVO> getList();
+}
+```
+
+> 인터페이스 수정 후에는 반드시 기존 테스트 코드를 통해서 기존과 동일하게 동작하는지 확인해야 합니다.
+> 
