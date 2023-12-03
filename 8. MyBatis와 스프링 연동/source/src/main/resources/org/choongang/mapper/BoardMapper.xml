@@ -17,7 +17,24 @@
 
     <insert id="insertSelectKey" useGeneratedKeys="true" keyProperty="bno">
         INSERT INTO BOARD (TITLE, CONTENT, WRITER)
-        VALUES (${title}, #{content}, #{writer})
+        VALUES (#{title}, #{content}, #{writer})
     </insert>
 
+    <select id="read" resultType="org.choongang.domain.BoardVO">
+        SELECT * FROM BOARD WHERE BNO = #{bno}
+    </select>
+
+    <delete id="delete">
+        DELETE FROM BOARD WHERE BNO = #{bno}
+    </delete>
+
+    <update id="update">
+        UPDATE BOARD
+            SET
+                TITLE = #{title},
+                CONTENT = #{content},
+                WRITER = #{writer},
+                UPDATEDATE = CURRENT_TIMESTAMP
+        WHERE BNO = #{bno}
+    </update>
 </mapper>
