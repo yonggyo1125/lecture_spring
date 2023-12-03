@@ -571,3 +571,57 @@ public class TimeMapperTests {
 > XML을 작성해서 사용할 때에는 XML 파일의 위치와 XML 파일에 지정하는 namespace 속성이 중요한데, XML 파일 위치의 경우 Mapper 인터페이스가 있는 곳에 같이 작성하거나 <code>src/main/resources</code> 구조에 XML을 저장할 폴더를 생성할 수 있습니다. XML 파일을 만들 때 이름에 대한 규칙은 없지만, 가능하다면 Mapper 인터페이스와 같은 이름을 이용하는 것이 가독성을 높여줍니다.
 > 
 > <code>src/main/resources</code> 폴더 내 org 폴더와 하위 choongang 폴더, mapper 폴더를 생성하고 <code>TimeMapper.xml</code>를 생성합니다.
+> 
+> XML 파일에는 MyBatis의 XML 매퍼에서 이용하는 태그에 대한 설정이 필요합니다. 이에 대한 자세한 정보는 https://mybatis.org/mybatis-3/getting-started.html#exploring-mapped-sql-statements 를 통해서 확인하세요.
+
+<br>
+> MySQL 기준 
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.choongang.mapper.TimeMapper">
+    <select id="getTime2" resultType="string">
+        SELECT CURRENT_TIMESTAMP
+    </select>
+</mapper>
+```
+
+> Oracle 기준
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.choongang.mapper.TimeMapper">
+    <select id="getTime2" resultType="string">
+        SELECT SYSDATE FROM DUAL
+    </select>
+</mapper>
+```
+
+
+
+> Mapper 인터페이스와 XML을 함께 이용해 보기 위해서 기존의 TimeMapper 인터페이스에 추가적인 메서드를 선언합니다.
+
+
+> org.choongang.mapper.TimeMapper.java
+
+```java
+package org.choongang.mapper;
+
+import org.apache.ibatis.annotations.Select;
+
+public interface TimeMapper {
+
+    @Select("SELECT CURRENT_TIMESTAMP")
+    String getTime();
+
+    String getTime2();
+}
+```
+
+> TimeMapper 인터페이스를 보면 getTime2()가 추가된 것을 볼 수 있는데 특이하게도 <code>@Select</code>와 같이 MyBatis 어노테이션이 존재하지 않고 SQL 역시 존재하지 않는 것을 볼수 있습니다.
