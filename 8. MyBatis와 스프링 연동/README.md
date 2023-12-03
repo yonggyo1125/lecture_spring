@@ -647,3 +647,42 @@ public class TimeMapperTests {
     }
 }
 ```
+
+## slf4j 설정
+
+### 의존성 추가 
+
+> <code>slf4j-api</code>와 구현체인 <code>logback-classic</code> 의존성을 <code>build.gradle</code>에 추가합니다.
+
+```groovy
+dependencies {
+    
+    ... 
+    
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'ch.qos.logback:logback-classic:1.4.14'
+    
+    ...
+    
+}
+```
+
+### 로거 설정하기 - src/main/resources/logback.xml
+
+```xml
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<configuration>
+    <appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d %5p %c{2} - %m%n</pattern>
+        </encoder>
+    </appender>
+    <root level="INFO">
+        <appender-ref ref="stdout" />
+    </root>
+
+    <logger name="org.springframework.jdbc" level="DEBUG" />
+    <logger name="org.choongang.mapper" level="DEBUG" />
+</configuration>
+```
