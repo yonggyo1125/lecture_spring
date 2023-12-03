@@ -2,11 +2,11 @@
 
 1. [개발환경 구축](https://github.com/yonggyo1125/lecture_spring/tree/master/1.%20%EA%B0%9C%EB%B0%9C%ED%99%98%EA%B2%BD%EA%B5%AC%EC%B6%95) 
 2. [메이븐(Maven), 그래이들(Gradle) 사용법](https://github.com/yonggyo1125/lecture_spring/tree/master/2.%20%EB%A9%94%EC%9D%B4%EB%B8%90(Maven)%2C%20%EA%B7%B8%EB%A0%88%EC%9D%B4%EB%93%A4(Gradle)%20%EC%82%AC%EC%9A%A9%EB%B2%95) 
-3. [스프링 DI](https://github.com/yonggyo1125/lecture_spring/tree/master/3.%20%EC%8A%A4%ED%94%84%EB%A7%81%20DI)
+3. [스프링 프로젝트 생성하기, 스프링 DI](https://github.com/yonggyo1125/lecture_spring/tree/master/3.%20%EC%8A%A4%ED%94%84%EB%A7%81%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EC%83%9D%EC%84%B1%ED%95%98%EA%B8%B0%2C%20%EC%8A%A4%ED%94%84%EB%A7%81%20DI)
 4. [의존성 자동 주입, 컴포넌트 스캔](https://github.com/yonggyo1125/lecture_spring/tree/master/4.%20%EC%9D%98%EC%A1%B4%EC%84%B1%20%EC%9E%90%EB%8F%99%20%EC%A3%BC%EC%9E%85%2C%20%EC%BB%B4%ED%8F%AC%EB%84%8C%ED%8A%B8%20%EC%8A%A4%EC%BA%94)
 5. [빈 라이프 사이클](https://github.com/yonggyo1125/lecture_spring/tree/master/5.%20%EB%B9%88%20%EB%9D%BC%EC%9D%B4%ED%94%84%20%EC%82%AC%EC%9D%B4%ED%81%B4)
 6. [AOP 프로그래밍](https://github.com/yonggyo1125/lecture_spring/tree/master/6.%20AOP%20%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D)
-7. [JdbcTemplate, Spring Data JDBC](https://github.com/yonggyo1125/lecture_spring/tree/master/7.%20JdbcTemplate%2C%20Spring%20Data%20JDBC)
+7. [JdbcTemplate](https://github.com/yonggyo1125/lecture_spring/tree/master/7.%20JdbcTemplate)
 8. [MyBatis와 스프링 연동](https://github.com/yonggyo1125/lecture_spring/tree/master/8.%20MyBatis%EC%99%80%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EC%97%B0%EB%8F%99)
 9. [스프링 웹 MVC - 설정, 프레임워크 동작 방식](https://github.com/yonggyo1125/lecture_spring/tree/master/9.%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EC%9B%B9%20MVC%20-%20%EC%84%A4%EC%A0%95%2C%20%ED%94%84%EB%A0%88%EC%9E%84%EC%9B%8C%ED%81%AC%20%EB%8F%99%EC%9E%91%EB%B0%A9%EC%8B%9D) 
 10. [스프링 웹 MVC - 요청매핑, 커맨드 객체, 폼 태그, 모델](https://github.com/yonggyo1125/lecture_spring/tree/master/10.%20%EC%8A%A4%ED%94%84%EB%A7%81%20%EC%9B%B9%20MVC%20-%20%EC%9A%94%EC%B2%AD%EB%A7%A4%ED%95%91%2C%20%EC%BB%A4%EB%A7%A8%EB%93%9C%20%EA%B0%9D%EC%B2%B4%2C%20%ED%8F%BC%20%ED%83%9C%EA%B7%B8%2C%20%EB%AA%A8%EB%8D%B8)
