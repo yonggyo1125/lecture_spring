@@ -1,4 +1,4 @@
-# MyBatis와 스프링 연동
+# JDBC와 커넥션 풀 설정
 
 ## JDBC 연결 
 
@@ -340,3 +340,136 @@ public class DataSourceTests2 {
 }
 ```
 
+# MyBatis와 스프링 연동
+
+## MyBatis
+
+- MyBatis(https://mybatis.org/mybatis-3/)는 흔히 <code>SQL 매핑(mapping)</code> 프레임워크로 분류
+- 개발자들은 JDBC 코드의 복잡하고 지루한 작업을 피하는 용도로 많이 사용합니다. 
+- 전통적인 JDBC 프로그래밍의 구조와 비교해 보면 MyBatis의 장점을 파악할 수 있습니다.
+
+| 전통적인 JDBC 프로그램 | MyBatis             |
+|----------------|---------------------|
+|- 직접 Connection을 맺고 마지막에 close()|자동으로 Connection close() 가능|
+|PreparedStatement의 setXXX()등에 대한 모든 작업을 개발자가 처리|#{prop}과 같이 속성을 지정하면 내부적으로 자동 처리|
+|SELECT의 경우 직접 ResultSet 처리|리턴 타입을 지정하는 경우 자동으로 객체 생성 및 ResultSet 처리|
+
+- MyBatis는 기존의 SQL을 그대로 활용할 수 있다는 장접이 있고, 진입 장벽이 낮은 편이어서 JDBC의 대안으로 많이 사용합니다.
+- 스프링 프레임워크의 특징 중 하나는 다른 프레임워크를 배척하는 대신에 다른 프레임워크들과의 연동을 쉽게 하는 추가적인 라이브러리들이 많다는 것입니다. 
+- MyBatis 역시 <code>mybatis-spring</code>이라는 라이브러리를 통해서 쉽게 연동작업을 처리할 수 있습니다.
+
+### MyBatis 관련 라이브러리 추가
+
+- <code>spring-jdbc/spring-tx</code> : 스프링에서 데이터베이스 처리와 트랜잭션 처리(해당 라이브러리들은 MyBatis와 무관하게 보이지만 추가하지 않은 경우에 에러가 발생하므로 주의합니다.)
+- <code>mybatis/mybatis-spring</code> : MyBatis와 스프링 연동용 라이브러리
+
+> build.gradle
+
+```groovy
+dependencies {
+    def spring_version= '6.1.1'
+    
+    ...
+
+    // MyBatis
+    implementation 'org.mybatis:mybatis:3.5.14'
+    implementation 'org.mybatis:mybatis-spring:3.0.3'
+
+    // Spring jdbc
+    implementation "org.springframework:spring-jdbc:${spring_version}"
+
+    ...
+}
+```
+
+### SQLSessionFactory
+
+- MyBatis에서 가장 핵심적인 객체는 <code>SqlSession</code>이라는 존재와 <code>SqlSessionFactory</code> 입니다.
+- <code>SqlSessionFactory</code>의 이름에서 보듯이 내부적으로 <code>SqlSession</code>이라는 것을 만들어내는 존재
+- 개발에서는 <code>SqlSession</code>을 통해서 <code>Connection</code>을 생성하거나 원하는 SQL을 전달하고, 결과를 리턴 받는 구조로 작성하게 됩니다. 
+- 스프링에 <code>SqlSessionFactory</code>를 등록하는 작업은 <code>SqlSessionFactoryBean</code>을 이용합니다.
+- 패키지명을 보면 MyBatis의 패키지가 아니라 스프링과 연동 작업을 처리하는 <code>mybatis-spring</code>라이브러리의 클래스임을 알 수 있습니다.
+
+> org.choongang.cofigs.DbConfig.java
+
+```java
+package org.choongang.configs;
+
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.tomcat.jdbc.pool.DataSource;
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+
+
+@Configuration
+public class DbConfig {
+    
+    ...
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource());
+        return sqlSessionFactoryBean.getObject();
+    }
+}
+
+```
+
+> <code>SqlSessionFactoryBean</code>을 이용해서 <code>SqlSession</code>을 사용해 보는 테스트는 기존의 DataSourceTests 클래스에 추가해서 확인합니다.
+
+```java
+package org.choongang;
+
+
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.choongang.configs.DbConfig;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.SQLException;
+
+@ExtendWith(SpringExtension.class)
+@ContextConfiguration(classes=DbConfig.class)
+public class DataSourceTests {
+
+    @Autowired
+    private DataSource dataSource;
+
+    @Autowired
+    private SqlSessionFactory sqlSessionFactory;
+
+    ...
+
+    @Test
+    public void testMyBatis() {
+        try (SqlSession session = sqlSessionFactory.openSession();
+            Connection con = session.getConnection()) {
+
+            System.out.println(session);
+            System.out.println(con);
+            
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+}
+```
+
+> <code>testMyBatis()</code>는 설정된 <code>SqlSessionFactory</code> 인터페이스 타입의 <code>SqlSessionFactoryBean</code>을 이용해서 생성하고 이를 이용해서 <code>Connection</code>까지를 테스트 합니다. 
+
+## 스프링과의 연동 처리 
+
+> <code>SqlSessionFactory</code>를 이용해서 코드를 작성해도 직접 <code>Connection</code>을 얻어서 JDBC 코딩이 가능하지만, 좀 더 편하게 작업하기 위해서는 SQL을 어떻게 처리할 것인지를 별도의 설정을 분리해 주고, 자동으로 처리되는 방식을 이용하는 것이 좋습니다. 이를 위해서는 MyBatis의 <code>Mapper</code>라는 존재를 작성해 줘야 합니다.
+> 
+> <code>Mapper</code>는 쉽게 말해서 SQL과 그에 대한 처리를 지정하는 역할을 합니다. <code>MyBatis-Spring</code>을 이용하는 경우에는 <code>Mapper</code>를 <code>XML</code>과 <code>인터페이스</code> + <code>어노테이션</code>의 형태로 작성할 수 있습니다.
+
+### Mapper 인터페이스

@@ -1,6 +1,8 @@
 package org.choongang.configs;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.tomcat.jdbc.pool.DataSource;
+import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -23,5 +25,12 @@ public class DbConfig {
        ds.setTimeBetweenEvictionRunsMillis(5 * 1000);
 
        return ds;
+    }
+
+    @Bean
+    public SqlSessionFactory sqlSessionFactory() throws Exception {
+        SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
+        sqlSessionFactoryBean.setDataSource(dataSource());
+        return sqlSessionFactoryBean.getObject();
     }
 }
